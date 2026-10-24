@@ -3,16 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>A Redirecionar para o Dominical App...</title>
-    <!-- Redirecionamento instantâneo para o Deep Link do app -->
-    <meta http-equiv="refresh" content="0;url=dominicalapp://">
-</head>
-<body>
-    <p>A abrir o Dominical App... Se não fores redirecionado automaticamente, <a href="dominicalapp://">clica aqui</a>.</p>
-
-    <!-- Redirecionamento por JavaScript -->
+    <title>A abrir o Dominical App...</title>
     <script>
-        window.location.href = "dominicalapp://";
+        window.onload = function() {
+            // Captura os parâmetros (tokens) que o Supabase enviou para esta página web
+            const queryAndHash = window.location.search + window.location.hash;
+            
+            // Monta o link profundo direcionando para o app mantendo os tokens
+            const deepLink = "dominicalapp://" + queryAndHash;
+
+            // Tenta abrir a aplicação imediatamente
+            window.location.href = deepLink;
+
+            // Se passados 2 segundos a app não abrir (ou seja, não estava instalada), mostra opções na tela
+            setTimeout(function() {
+                document.getElementById("fallback-content").style.display = "block";
+            }, 2000);
+        };
     </script>
+</head>
+<body style="font-family: Arial, sans-serif; text-align: center; padding-top: 50px; background-color: #f9f9f9; color: #333;">
+    <h2>A abrir o Dominical App...</h2>
+    <p>Por favor, aguarda enquanto redirecionamos-te para a aplicação.</p>
+
+    <!-- Conteúdo que aparece caso o utilizador não tenha a app -->
+    <div id="fallback-content" style="display: none; margin-top: 30px; padding: 20px;">
+        <p style="color: #d9534f; font-weight: bold;">Não foi possível abrir a aplicação automaticamente.</p>
+        <p>Parece que o <strong>Dominical App</strong> não está instalado neste dispositivo.</p>
+        
+        <br>
+        <!-- Botão para tentar abrir manualmente caso o deep link tenha demorado -->
+        <a href="javascript:window.location.href = 'dominicalapp://' + window.location.search + window.location.hash;" 
+           style="background-color: #007bff; color: white; padding: 12px 24px; text-decoration: none; border-radius: 5px; display: inline-block; font-weight: bold;">
+           Tentar Abrir Novamente
+        </a>
+    </div>
 </body>
 </html>
