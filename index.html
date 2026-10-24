@@ -3,40 +3,116 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>A abrir o Dominical App...</title>
-    <script>
-        window.onload = function() {
-            // Captura os parâmetros (tokens) que o Supabase enviou para esta página web
-            const queryAndHash = window.location.search + window.location.hash;
-            
-            // Monta o link profundo direcionando para o app mantendo os tokens
-            const deepLink = "dominicalapp://" + queryAndHash;
+    <title>Bem-vindo ao Dominical App</title>
+    <style>
+        :root {
+            --bg-gradient: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            --card-bg: #ffffff;
+            --text-color: #0f172a;
+            --subtext-color: #64748b;
+            --border-color: #e2e8f0;
+            --primary-color: #2563EB;
+            --success-color: #15803D;
+            --success-bg: #f0fdf4;
+            --success-border: #bbf7d0;
+        }
 
-            // Tenta abrir a aplicação imediatamente
-            window.location.href = deepLink;
+        /* Suporte automático para o modo escuro do sistema */
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-gradient: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%);
+                --card-bg: #1e293b;
+                --text-color: #f8fafc;
+                --subtext-color: #94A3B8;
+                --border-color: #334155;
+                --primary-color: #60A5FA;
+                --success-color: #4ADE80;
+                --success-bg: #064e3b;
+                --success-border: #065f46;
+            }
+        }
 
-            // Se passados 2 segundos a app não abrir (ou seja, não estava instalada), mostra opções na tela
-            setTimeout(function() {
-                document.getElementById("fallback-content").style.display = "block";
-            }, 2000);
-        };
-    </script>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background: var(--bg-gradient);
+            color: var(--text-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 420px;
+            padding: 20px;
+            box-sizing: border-box;
+            text-align: center;
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 30px 20px;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            font-size: 26px;
+            font-weight: bold;
+            margin-top: 15px;
+            margin-bottom: 8px;
+            color: var(--text-color);
+        }
+
+        p {
+            font-size: 15px;
+            color: var(--subtext-color);
+            line-height: 1.5;
+            margin-bottom: 24px;
+        }
+
+        .aviso {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background-color: var(--success-bg);
+            border: 1px solid var(--success-border);
+            border-radius: 12px;
+            padding: 14px;
+            text-align: left;
+            margin-top: 20px;
+        }
+
+        .aviso-texto {
+            font-size: 13px;
+            color: var(--text-color);
+            font-weight: 500;
+            margin: 0;
+        }
+
+        .icone-sucesso {
+            color: var(--success-color);
+            font-size: 20px;
+            font-weight: bold;
+        }
+    </style>
 </head>
-<body style="font-family: Arial, sans-serif; text-align: center; padding-top: 50px; background-color: #f9f9f9; color: #333;">
-    <h2>A abrir o Dominical App...</h2>
-    <p>Por favor, aguarda enquanto redirecionamos-te para a aplicação.</p>
+<body>
+    <div class="container">
+        <div class="card">
+            <!-- Podes substituir pelo link real do teu logótipo ou manter o texto formatado -->
+            <h1>Dominical App</h1>
+            <p>E-mail confirmado com sucesso!</p>
 
-    <!-- Conteúdo que aparece caso o utilizador não tenha a app -->
-    <div id="fallback-content" style="display: none; margin-top: 30px; padding: 20px;">
-        <p style="color: #d9534f; font-weight: bold;">Não foi possível abrir a aplicação automaticamente.</p>
-        <p>Parece que o <strong>Dominical App</strong> não está instalado neste dispositivo.</p>
-        
-        <br>
-        <!-- Botão para tentar abrir manualmente caso o deep link tenha demorado -->
-        <a href="javascript:window.location.href = 'dominicalapp://' + window.location.search + window.location.hash;" 
-           style="background-color: #007bff; color: white; padding: 12px 24px; text-decoration: none; border-radius: 5px; display: inline-block; font-weight: bold;">
-           Tentar Abrir Novamente
-        </a>
+            <div class="aviso">
+                <div class="icone-sucesso">✓</div>
+                <p class="aviso-texto">A sua conta foi ativada com sucesso. Já pode fechar esta página e entrar na aplicação no seu dispositivo.</p>
+            </div>
+        </div>
     </div>
 </body>
 </html>
